@@ -335,7 +335,7 @@ We planned to evaluate how accuracy changes without these strong predictors.
   - Testing binary classification (Traditional vs IoT greenhouse)
   - Validating model performance on unseen/real-world data
 
-
+Code: https://colab.research.google.com/drive/1qCRIBm721x5O1UPOtMTScjU5geUlYkgx?usp=sharing
 
 
 
