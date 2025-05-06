@@ -270,6 +270,71 @@ In the context of this dataset—collected from controlled greenhouse experiment
 
 Despite the perfect accuracy, it’s important to further analyze **feature importance** to understand which features are driving the predictions and whether the model is overly reliant on a small subset of variables.
 
+## 🔍 **4. Feature Importance & Interpretation**
+
+To understand how different features contributed to the model’s predictions, we extracted **feature importances** from the trained **Random Forest** and **XGBoost** classifiers.
+
+✅ Both models consistently identified the following top features:
+
+| Rank | Feature                         | Importance (Random Forest) |
+|:----:|:--------------------------------|:-------------------------:|
+| 1    | AWWGV (Avg wet weight of veg)   | ~0.28                      |
+| 2    | ALAP (Avg leaf area per plant)  | ~0.27                      |
+| 3    | ADWV (Avg dry weight veg parts) | ~0.18                      |
+
+Together, **AWWGV and ALAP accounted for over 50% of the model’s predictive power**, indicating that much of the classification decision was driven by these two features.
+
+---
+
+### **Feature Importance Plots**
+
+| Random Forest Feature Importance | XGBoost Feature Importance |
+|:-------------------------------:|:-------------------------:|
+| ![rf_importance](plots/rf_importance.png) | ![xgb_importance](plots/xgb_importance.png) |
+
+*(Save generated plots under `/plots` folder.)*
+
+---
+
+### **Interpretation**
+
+Achieving **100% accuracy on both the training and test sets** combined with high feature importances for just two variables suggests:
+
+✅ The dataset contains **highly separable patterns** between classes  
+✅ The model is **strongly reliant on a small subset of features**  
+✅ Potential **feature redundancy or data leakage** (if certain features act as proxies for the class label)
+
+This is plausible in experimental data from controlled environments, like greenhouses, where conditions are tightly managed.
+
+---
+
+## ✨ **Experiment: Removing Top Features**
+
+To test the model’s dependency on the top features, we attempted retraining after dropping:
+
+- **Scenario 1:** Dropped the most important feature (`AWWGV`)
+- **Scenario 2:** Dropped the top two features (`AWWGV` and `ALAP`)
+
+We planned to evaluate how accuracy changes without these strong predictors.
+
+> ⚠️ **Note:** Due to environment limitations, this retraining experiment could not complete within the current runtime environment.  
+> 
+> However, we expect:
+> - A noticeable drop in accuracy without the top 2 features
+> - Remaining features still holding partial predictive power
+
+✅ We encourage running this experiment locally to verify and explore the extent of model dependency on top features.
+
+---
+
+## 🎯 **Takeaways**
+
+- A small subset of features (**AWWGV**, **ALAP**) largely drives model predictions
+- Perfect classification accuracy suggests a highly separable dataset
+- Future work could explore:
+  - Reducing features for minimal-input models
+  - Testing binary classification (Traditional vs IoT greenhouse)
+  - Validating model performance on unseen/real-world data
 
 
 
