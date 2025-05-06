@@ -255,6 +255,9 @@ All three machine learning models achieved **perfect accuracy on the test set**:
 
 ---
 
+![1](https://github.com/user-attachments/assets/8d1bc0ac-95ef-4cbf-960f-61fe2b0ff435)
+![2](https://github.com/user-attachments/assets/bd1a0059-b92d-45c6-b9db-2b72597fba6d)
+
 ### **Interpretation**
 
 Achieving **100% accuracy on both training and unseen test data** is highly unusual in real-world machine learning tasks. This suggests:
