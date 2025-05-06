@@ -183,8 +183,89 @@ print("Class mapping:", class_mapping)
 
 The dataset is now clean, numeric, and scaled—ready for machine learning modeling!
 
+## 🤖 **3. Machine Learning Modeling**
 
+We trained and evaluated three machine learning models for **multiclass classification** (6 classes):
 
+✅ Logistic Regression (multinomial)  
+✅ Random Forest Classifier  
+✅ XGBoost Classifier
+
+All models were trained using:
+- Feature matrix: **12 scaled numeric features**
+- Target: **encoded Class label (0–5)**
+- **Train-test split:** 80% train / 20% test (stratified)
+
+---
+
+### **Model Training Code**
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Initialize models
+models = {
+    'Logistic Regression': LogisticRegression(multi_class='multinomial', max_iter=1000),
+    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
+    'XGBoost': XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', random_state=42)
+}
+
+# Train and evaluate
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    print(f"\n{name} Accuracy: {acc:.4f}")
+    print(classification_report(y_test, y_pred))
+    
+    # Confusion matrix
+    cm = confusion_matrix(y_test, y_pred)
+    plt.figure(figsize=(6, 5))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
+    plt.title(f'{name} - Confusion Matrix')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.show()
+```
+
+### **Results**
+
+All three machine learning models achieved **perfect accuracy on the test set**:
+
+| Model                | Accuracy |
+|---------------------|----------|
+| Logistic Regression  | 1.0000   |
+| Random Forest        | 1.0000   |
+| XGBoost              | 1.0000   |
+
+✅ Every sample in the test set was correctly classified.  
+✅ The precision, recall, and F1-score for each class were all **1.00**.  
+✅ Confusion matrices showed **zero misclassifications across all classes.**
+
+---
+
+### **Interpretation**
+
+Achieving **100% accuracy on both training and unseen test data** is highly unusual in real-world machine learning tasks. This suggests:
+
+- The dataset has **very strong and easily separable patterns** between classes.
+- One or more features might be **highly correlated** with the target class, making classification very straightforward.
+- There may be **redundant or potentially leaking features** (features that act as proxies for the class label).
+
+In the context of this dataset—collected from controlled greenhouse experiments—it’s plausible that the data is inherently clean, structured, and highly separable.
+
+Despite the perfect accuracy, it’s important to further analyze **feature importance** to understand which features are driving the predictions and whether the model is overly reliant on a small subset of variables.
 
 
 
