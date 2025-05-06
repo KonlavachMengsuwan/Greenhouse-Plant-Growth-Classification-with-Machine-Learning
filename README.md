@@ -126,6 +126,74 @@ for feat in features:
 ![5](https://github.com/user-attachments/assets/568b3bc2-b1aa-4048-85b3-26c5c048edae)
 ![6](https://github.com/user-attachments/assets/144a7a54-53f4-4a7b-8aca-43a0efcceb72)
 
+## 🛠️ **2. Data Preprocessing**
+
+After completing exploratory data analysis, we prepared the dataset for machine learning:
+
+✅ Dropped the `Random` column → this identifier does not provide predictive information.
+
+✅ Encoded the categorical target variable `Class` into numeric labels:
+
+| Original Class | Encoded |
+|:---------------|:--------|
+| SA              | 0       |
+| SB              | 1       |
+| SC              | 2       |
+| TA              | 3       |
+| TB              | 4       |
+| TC              | 5       |
+
+✅ Scaled the numeric features using **StandardScaler** → ensures features have zero mean and unit variance, improving performance for distance-based algorithms.
+
+✅ Prepared:
+- Feature matrix `X_scaled`: shape **(30,000 samples, 12 features)**
+- Target vector `y`: encoded class labels
+
+---
+
+### **Preprocessing Code**
+
+```python
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+# Drop irrelevant column
+df_clean = df.drop(columns=['Random'])
+
+# Encode target labels
+label_encoder = LabelEncoder()
+df_clean['Class_encoded'] = label_encoder.fit_transform(df_clean['Class'])
+
+# Prepare features and target
+X = df_clean.drop(columns=['Class', 'Class_encoded'])
+y = df_clean['Class_encoded']
+
+# Scale features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Mapping of class labels
+class_mapping = dict(zip(label_encoder.classes_, label_encoder.transform(label_encoder.classes_)))
+print("Class mapping:", class_mapping)
+```
+
+✅ The encoded class mapping is:
+```
+{'SA': 0, 'SB': 1, 'SC': 2, 'TA': 3, 'TB': 4, 'TC': 5}
+```
+
+The dataset is now clean, numeric, and scaled—ready for machine learning modeling!
+```
+
+---
+
+✅ This explanation is detailed but clear, matching the professional tone from earlier.
+
+You can copy-paste this under a **"2. Data Preprocessing"** heading in your README.
+
+Would you like the next section to cover **Modeling** (training, evaluation, code, and GitHub text) too? 😊
+
+```
+
 
 
 
