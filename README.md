@@ -182,7 +182,6 @@ print("Class mapping:", class_mapping)
 ```
 
 The dataset is now clean, numeric, and scaled—ready for machine learning modeling!
-```
 
 
 
