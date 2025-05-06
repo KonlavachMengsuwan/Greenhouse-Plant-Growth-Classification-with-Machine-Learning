@@ -290,9 +290,8 @@ Together, **AWWGV and ALAP accounted for over 50% of the model’s predictive po
 
 | Random Forest Feature Importance | XGBoost Feature Importance |
 |:-------------------------------:|:-------------------------:|
-| ![rf_importance](plots/rf_importance.png) | ![xgb_importance](plots/xgb_importance.png) |
+| ![rf_importance](https://github.com/user-attachments/assets/924449bb-888c-467d-8398-02a8f0ac3855) | ![xgb_importance](https://github.com/user-attachments/assets/9299a457-0d79-48b2-ae3b-adf1cd31e36b)|
 
-*(Save generated plots under `/plots` folder.)*
 
 ---
 
