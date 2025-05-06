@@ -184,17 +184,6 @@ print("Class mapping:", class_mapping)
 The dataset is now clean, numeric, and scaled—ready for machine learning modeling!
 ```
 
----
-
-✅ This explanation is detailed but clear, matching the professional tone from earlier.
-
-You can copy-paste this under a **"2. Data Preprocessing"** heading in your README.
-
-Would you like the next section to cover **Modeling** (training, evaluation, code, and GitHub text) too? 😊
-
-```
-
-
 
 
 
